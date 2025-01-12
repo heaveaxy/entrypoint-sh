@@ -1,0 +1,37 @@
+{
+  "branches": ["main"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "sed -i \"s|^\\(# entrypoint\\.sh\\s*\\)\\S*\\(\\s*<https.*\\)|\\1${nextRelease.version}\\2|\" entrypoint.sh"
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# entrypoint-sh chronicles"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["entrypoint.sh", "CHANGELOG.md"]
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "entrypoint.sh",
+            "label": "Ready to go: entrypoint-sh"
+          }
+        ]
+      }
+    ]
+  ]
+}
