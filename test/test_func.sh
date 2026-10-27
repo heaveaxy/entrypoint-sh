@@ -18,7 +18,7 @@ EOF
 cat <<EOF > "${FIXTURE_CONFIG_TARGET_FILE}"
 option_password = "test_password"
 option_hash = "\$6\$test_salt\$aNni3BLA8N8DzrwFL7kBOUUj7nMi8wrrpxzvbuPuNowFXJVz5/qQirxEXmjuozg2auTw8OJz3Xa9OLG6cjNhl."
-option_host = "8.47.69.5"
+option_host = "104.20.23.154"
 option_unknown = "disable"
 EOF
 

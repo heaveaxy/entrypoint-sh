@@ -150,7 +150,7 @@ process_config() {
         log "$L_ERR" "Unable to create config file '$_target_config'"
         exit 1
     fi
-    cat "$1" | envsubst_awk > "$_target_config"
+    envsubst_awk < "$1" > "$_target_config"
 }
 
 main() {
