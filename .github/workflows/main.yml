@@ -28,7 +28,7 @@ jobs:
       issues: write
       pull-requests: write
       id-token: write
-    if: ${{ github.ref == 'refs/heads/github-ci' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
