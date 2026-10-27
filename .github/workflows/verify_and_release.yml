@@ -1,0 +1,42 @@
+name: Main workflow
+run-name: Verify & Release
+on: [push]
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v7
+      - name: check shellcheck
+        run: shellcheck -V
+      - name: check resolve
+        run: host -t A "example.com"
+      - name: Linting scripts using shellcheck
+        run: shellcheck ./entrypoint.sh ./test/*.sh
+      - name: Running unit tests
+        run: sh test/test_unit.sh
+      - name: Running functional tests
+        run: sh test/test_func.sh
+
+  release:
+    runs-on: ubuntu-slim
+    needs: verify
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    if: ${{ github.ref == 'refs/heads/github-ci' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '26'
+      - name: Preparing environment
+        run: npm ci
+      - name: Preparing release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
