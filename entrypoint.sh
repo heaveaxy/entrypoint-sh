@@ -12,7 +12,7 @@
 # You should have received a copy of the GNU General Public License along with this
 # program. If not, see <https://www.gnu.org/licenses/>.
 
-# entrypoint.sh 1.0.0 <https://github.com/heaveaxy/entrypoint-sh>
+# entrypoint.sh 1.1.0 <https://github.com/heaveaxy/entrypoint-sh>
 
 ##############################
 ########## SETTINGS ##########
