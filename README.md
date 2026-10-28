@@ -31,7 +31,7 @@ Settings are defined in the first section of the script. The following general s
 
     Prefix of environment variables processed by this script. Variables that do not start with this string are ignored.
     
-* `OPT_TEMPLATE` (**required**)
+* `OPT_TEMPLATE` (**optional**)
 
     Path to the configuration file template (filled with environment variable references). This file is left untouched. All changes are prepared in a copy of it with the last extension dropped from the name. Therefore, it is necessary to use an additional file extension like `.template`.
 
@@ -48,7 +48,7 @@ Settings are defined in the first section of the script. The following general s
     When the next context is defined, `su-exec` or `gosu` must exist; otherwise, context switching will be skipped with a warning.
 
 ## Usage
-The general purpose of this script is to prepare a configuration file before running the main application.
+The general purpose of this script is to prepare a configuration file before running the main application. If no configuration file is defined, the script will only process environment variables
 
 You simply fill the config file with variable references as follows:
 - `${INIT_LOGLEVEL}` — this will be replaced with the value of the environment variable `INIT_LOGLEVEL`. If `INIT_LOGLEVEL` is undefined, it will be resolved to an empty string.
