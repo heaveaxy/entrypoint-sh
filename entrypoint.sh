@@ -25,7 +25,7 @@ OPT_ENVVAR_PREFIX=${OPT_ENVVAR_PREFIX:-"INIT_"}
 
 # Path to configuration file in container that will processed by container-init
 # Note about extra extension. This file will be copied to another - without last extension in name.
-OPT_TEMPLATE=${OPT_TEMPLATE:-"/path/to/config.conf.template"}
+# OPT_TEMPLATE="/path/to/config.conf.template"
 
 # Executable will be ran after container-init completes it's own work.
 # Note about $* - cmdline arguments passed during running container. It may be important for application.
@@ -185,9 +185,10 @@ main() {
 
     unset envvar_preprocess
 
-    log "$L_INF" "Processing config file $OPT_TEMPLATE"
-
-    process_config "$OPT_TEMPLATE"
+    if [ -n "$OPT_TEMPLATE" ]; then
+        log "$L_INF" "Processing config file $OPT_TEMPLATE"
+        process_config "$OPT_TEMPLATE"
+    fi
 
     if [ -z "$CONTEXT_SWITCHER" ] && [ -n "$OPT_RUN_NEXT_CONTEXT" ]; then
         log "$L_WRN" "No context switcher executable found. Context will remain $(id -u):$(id -g)"
